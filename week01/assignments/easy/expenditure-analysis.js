@@ -13,13 +13,6 @@
   Output - [{ category: 'Food', totalSpent: 10 }] // Can have multiple categories, only one example is mentioned here
 */
 
-/*************  ✨ Windsurf Command ⭐  *************/
-/**
- * Calculate the total price spent by category from a list of transactions
- * @param {Array<Transaction>} Transactions - an array of objects with id, timestamp, price, category and itemName
- * @returns {Array<Object>} - an array of objects where each object is unique category-wise and has total price spent as its value
- */
-/*******  b6f281d7-8ab1-497a-8f1f-0129a46b78ab  *******/
 function calculateTotalSpentByCategory(Transactions) {
   let catTotal = []
 
