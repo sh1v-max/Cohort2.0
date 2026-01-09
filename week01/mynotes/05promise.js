@@ -6,14 +6,11 @@
 // rejected: meaning that the operation failed.
 
 const mydata = new Promise((resolve, reject) => {
-    // User lena bhja tha 
     fetch('https://randomuser.me/api')
         .then(raw => raw.json())
         .then(result => {
-            // Male hoga green button mtlab resolve
             if(result.results[0].gender === "male")
                 resolve();
-            // Female hoga red button mtlab reject
             else
                 reject();
         })
@@ -21,15 +18,15 @@ const mydata = new Promise((resolve, reject) => {
 console.log(mydata); // side stack - Promise { <pending> }
 
 
-// The below is my Task I can perform any task here after getting the users data from promise.
+
 mydata
     .then(() => {
-        console.log("Green Button daba diya - for MALE");
+        console.log("for MALE");
     })
     .catch(() => {
-        console.log("Red Button daba diya - for FEMALE");
+        console.log("for FEMALE");
     });
 
 
 
-// Open 05promise.html in browser type mydata in the consle and see the output
+// Open 05promise.html in browser type mydata in the console and see the output
