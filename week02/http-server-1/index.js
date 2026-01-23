@@ -24,7 +24,10 @@ app.get('/', (req, res) => {
 })
 
 app.post('/conversations', (req, res) => {
+  console.log("=====body=====")
   console.log(req.body)
+  console.log("=====headers=====")
+  console.log(req.headers)
   res.send({
     msg: 'POST request to /conversations received',
   })
