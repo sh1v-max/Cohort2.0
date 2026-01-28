@@ -21,6 +21,7 @@ function sum(n) {
 // and what function to call when that route is requested
 // req, res => request, response
 app.get('/', function (req, res) {
+  // this captures query parameter n from url
   const n = req.query.n
   const ans = sum(n)
   res.send('Hi There Sum is: ' + ans)
