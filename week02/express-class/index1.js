@@ -72,7 +72,9 @@ app.put('/', function (req, res) {
 
 // delete, user can remove a unHealthy kidneys
 app.delete('/', function (req, res) {
+  // we will check if there's any unhealthy kidney
   if (isThereAtLeastOneUnhealthyKidney()) {
+    // create a new array with only healthy kidneys
     const newKidneys = []
     for (let i = 0; i < users[0].kidneys.length; i++) {
       if (users[0].kidneys[i].healthy) {
@@ -81,11 +83,13 @@ app.delete('/', function (req, res) {
         })
       }
     }
+    // replace old kidneys with newKidneys
     users[0].kidneys = newKidneys
     res.json({
       msg: 'DELETE Done!',
     })
   } else {
+    // we can sent error status code as shown below
     res.status(411).json({
       msg: 'You have no bad Kidneys',
     })
@@ -94,6 +98,7 @@ app.delete('/', function (req, res) {
 
 // only if at least one unhealthy kidney is there else return 411
 function isThereAtLeastOneUnhealthyKidney() {
+  // this function checks if there's any unhealthy kidney
   let atLeastOneUnhealthyKidney = false
   for (let i = 0; i < users[0].kidneys.length; i++) {
     if (!users[0].kidneys[i].healthy) {
