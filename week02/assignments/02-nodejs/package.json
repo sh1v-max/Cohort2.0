@@ -19,6 +19,7 @@
     "testTimeout": 10000
   },
   "dependencies": {
+    "body-parser": "^2.2.2",
     "express": "^4.22.1",
     "uuid": "^9.0.0"
   }
