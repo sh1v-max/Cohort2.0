@@ -17,7 +17,7 @@ const ans = arr.filter((value) => {
 })
 console.log('Using Filter Even: ' + ans)
 
-// List the fullname and Age of the user with age greater than 30
+// lst the fullname and Age of the user with age greater than 30
 const users = [
   { firstName: 'John', lastName: 'Smith', age: 22 },
   { firstName: 'Emily', lastName: 'Johnson', age: 22 },
