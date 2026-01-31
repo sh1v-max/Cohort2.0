@@ -1,35 +1,33 @@
-// Given an array, give me back even values.
+// given an array, return even vals only
 
-// 1.  Using for loop
+// using for loop
 
-const arr = [1, 2, 3, 4, 5];
-const newArrLoop = [];
-for(let i=0; i<arr.length; i++){
-    if(arr[i] % 2 === 0){
-        newArrLoop.push(arr[i]);
-    }
+const arr = [1, 2, 3, 4, 5]
+const newArrLoop = []
+for (let i = 0; i < arr.length; i++) {
+  if (arr[i] % 2 === 0) {
+    newArrLoop.push(arr[i])
+  }
 }
-console.log("Using Loop Even: " + newArrLoop);
+console.log('Using Loop Even: ' + newArrLoop)
 
-// 2.  Using filter
+// using filter
 const ans = arr.filter((value) => {
-    return value % 2 === 0;
-});
-console.log("Using Filter Even: " + ans);
+  return value % 2 === 0
+})
+console.log('Using Filter Even: ' + ans)
 
-
-// 3. 
 // List the fullname and Age of the user with age greater than 30
 const users = [
-    {firstname:"Chandan", lastname:"Kushwaha", age:22},
-    {firstname:"Anjali", lastname:"Kumar", age:22},
-    {firstname:"RajKumar", lastname:"Kush", age:33},
-    {firstname:"Ram", lastname:"Sita", age:43},
-    {firstname:"Suraj", lastname:"waha", age:50},
-    {firstname:"Anshu", lastname:"Verma", age:25},
-];
+  { firstName: 'John', lastName: 'Smith', age: 22 },
+  { firstName: 'Emily', lastName: 'Johnson', age: 22 },
+  { firstName: 'William', lastName: 'Williams', age: 33 },
+  { firstName: 'Oliver', lastName: 'Brown', age: 43 },
+  { firstName: 'Ethan', lastName: 'Davis', age: 50 },
+  { firstName: 'Lily', lastName: 'Miller', age: 25 },
+]
 
 const fullname = users.filter((user) => {
-    return user.age > 30;
-});
-console.log(fullname);
+  return user.age > 30
+})
+console.log(fullname)
