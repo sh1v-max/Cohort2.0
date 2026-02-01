@@ -21,6 +21,20 @@ function removeAtIndex(arr, index) {
   return newArray
 }
 
+app.get('/', (req, res) => {
+  res.json({
+    status: 'ok',
+    message: 'Todo API is running, interact using Postman or curl.',
+    endpoints: {
+      getAll: 'GET /todos',
+      getOne: 'GET /todos/:id',
+      create: 'POST /todos',
+      update: 'PUT /todos/:id',
+      delete: 'DELETE /todos/:id',
+    },
+  })
+})
+
 app.get('/todos', (req, res) => {
   fs.readFile('todos.json', 'utf8', function (err, data) {
     if (err) throw err
