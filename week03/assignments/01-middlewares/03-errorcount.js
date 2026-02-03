@@ -24,14 +24,10 @@ app.get('/errorCount', function(req, res) {
 });
 
 
-/////////////
 app.use((err, req, res, next) => {
   errorCount++;
   res.status(404).end();
 });
-
-
-////////////
 
 
 module.exports = app;
