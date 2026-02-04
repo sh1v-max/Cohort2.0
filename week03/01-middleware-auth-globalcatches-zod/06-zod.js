@@ -1,30 +1,42 @@
+// to install - npm install zod
+// zod is a TypeScript-first schema declaration and validation library. It is designed to be easy to use with TypeScript, but still allow for easy integration with plain JavaScript.
 
-const express = require('express');
+
 const zod = require('zod');
-const app = express();
 
-const schema = zod.array(zod.number());
 
-app.use(express.json());
+// If this is array of numbers with atleast 1 input, return true else return false
 
-app.post('/health-checkup', function(req, res){
-    // kidneys = [1,2] - type in body of postman and use POST method
-    const kidneys = req.body.kidneys;
-    const response = schema.safeParse(kidneys);
-        // res.send({
-        //     response
-        // });
-        // OR
-        if(!response.success){
-            res.status(411).json({
-                message: 'Bad Input!'
-            });
-        }else{
-            res.send({
-                response
-            });
-        }
+function validateInput(arr){
+    const schema = zod.array(zod.number());
+
+    const response = schema.safeParse(arr);
+    console.log(response);
+}
+
+validateInput([1,2,3,4]); // Success
+validateInput([1,2,'3',4]); // Failure
+
+
+
+
+// The use case could be to validate a objects with specific keys and values, then we can use object() method of zod.
+
+function validateObject(obj){
+    const schema = zod.object({
+        email: zod.string().email(),
+        password: zod.string().min(6),
+    });
+
+    const response = schema.safeParse(obj);
+    console.log(response);
+}
+
+validateObject({ // Success
+    email: 'chandanck22@yahoo.com',
+    password: '123456'
 });
-
-
-app.listen(3000);   
+validateObject({  // Failure
+    email: 'chandan',
+    password: '123'  // password should be atleast 6 characters
+});
