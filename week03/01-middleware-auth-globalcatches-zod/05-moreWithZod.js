@@ -1,31 +1,9 @@
-// input validation
-// we want to make sure that the input we get from the user is valid
-// doing all checks manually can be tedious and error-prone
-// we can use libraries like Zod of Joi to help us with input validation
-// npm install zod
+// using zod with express
 
 const express = require('express')
 const app = express()
 const zod = require('zod')
-const port = 3000
-// creating a schema for array of numbers
-// describing the structure of the input
 const schema = zod.array(zod.number())
-
-// {
-//     email: String
-//     password: number
-//     country:'IN' 'US'
-// }
-
-// this is the schema for the object which we want to validate
-const schema2 = zod.object({
-  email: zod.string(),
-  password: zod.string(),
-  country: zod.literal('IN').or(zod.literal('US')),
-  kidney: zod.array(zod.number()),
-})
-
 app.use(express.json())
 
 app.get('/', (req, res) => {
@@ -55,6 +33,6 @@ app.post('/health-checkup', (req, res) => {
   // console.log(response)
 })
 
-app.listen(port, () => {
-  console.log('App is running on port ' + port)
+app.listen(3000, () => {
+  console.log('App is running on port 3000')
 })
