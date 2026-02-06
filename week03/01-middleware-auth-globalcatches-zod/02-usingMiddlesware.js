@@ -41,7 +41,7 @@ function kidneyMiddleware(req, res, next) {
 let numberOfRequest = 0
 function calculateRequest(req, res, next) {
   numberOfRequest++
-    console.log(`==============================`)
+  console.log(`==============================`)
   console.log(`Number of requests: ${numberOfRequest}`)
   next()
 }

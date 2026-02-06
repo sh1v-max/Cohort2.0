@@ -11,8 +11,12 @@ const zod = require('zod')
 
 function validateInput(arr) {
   const schema = zod.array(zod.number())
+  // what is schema?
+  // it is a zod object, which is used to validate the input data
 
   const response = schema.safeParse(arr)
+  // what is safeParse?
+  // it is a method of zod object, which is used to validate the input data
   console.log(response)
 }
 
