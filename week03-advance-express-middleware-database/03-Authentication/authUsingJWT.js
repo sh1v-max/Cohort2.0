@@ -59,7 +59,7 @@ app.post('/signin', function (req, res) {
   // creating token here, using payload and secret
   // JWT has 3 parts, header, payload, signature
   var token = jwt.sign({ username: username }, jwtPassword)
-  return res.json({
+  return res.json({ 
     // sending token to client
     // frontend stores this token in local storage, as cookies or memory
     token,
@@ -85,3 +85,4 @@ app.get('/users', function (req, res) {
 app.listen(3000, () => {
   console.log('App running on port 3000')
 })
+ 
