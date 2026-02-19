@@ -1,5 +1,3 @@
-const request = require('supertest')
-const assert = require('assert')
 const express = require('express')
 const app = express()
 // You have been given an express server which has a few endpoints.
@@ -19,7 +17,7 @@ setInterval(() => {
 app.use((req, res, next) => {
   const userId = req.headers['user-id']
   if (!userId) {
-    return res.status(400).send('Missing user-id header')
+    return res.status(400).send('no user id')
   }
 
   const now = Date.now()
@@ -29,7 +27,7 @@ app.use((req, res, next) => {
   )
 
   if (recentRequests.length >= 5) {
-    return res.status(404).send('Rate limit exceeded')
+    return res.status(404).send('rate limit exceeded')
   }
 
   userRequests.push(now)

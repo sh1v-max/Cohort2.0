@@ -20,6 +20,10 @@ const User = mongoose.model('User', {
   password: String,
 })
 
+app.get('/', function (req, res) {
+  res.send('Git is working')
+})
+
 // creating signup route to create a new user, we will use the User model to save the user data to the database
 app.post('/signup', async function (req, res) {
   const name = req.body.name
