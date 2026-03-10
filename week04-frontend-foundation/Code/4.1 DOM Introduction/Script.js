@@ -1,4 +1,6 @@
 //debouncing and throttling
+// debouncing: run -> lock, wait X ms -> unlock, run -> lock, wait X ms -> unlock, run ...
+
 let timer
 function debouncePopulateDiv() {
   // const element = document.getElementById('finalSum')
@@ -15,6 +17,7 @@ async function populateDiv() {
   const b = document.getElementById('secondNumber').value
   // const element = document.getElementById('finalSum')
   // element.innerHTML = parseInt(a) + parseInt(b)
+  // calling the backend
   const response = await fetch('http://localhost:3000/sum?a=' + a + '&b=' + b)
   const ans = await response.text()
   document.getElementById('finalSum').innerHTML = ans
