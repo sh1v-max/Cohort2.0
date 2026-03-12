@@ -6,39 +6,38 @@
 //     }
 
 function createChild(title, description, id) {
-    const child = document.createElement("div");
-    const firstGrandParent = document.createElement("div");
-    firstGrandParent.innerHTML = title;
-    const secondGrandParent = document.createElement("div");
-    secondGrandParent.innerHTML = description;
-    const thirdGrandParent = document.createElement("button");
-    thirdGrandParent.innerHTML = "Mark as done";
-    thirdGrandParent.setAttribute("onclick", `markAsDone(${id})`);
-    child.appendChild(firstGrandParent);
-    child.appendChild(secondGrandParent);
-    child.appendChild(thirdGrandParent);
-    child.setAttribute("id", id);
-    return child;
+  const child = document.createElement('div')
+  const firstGrandParent = document.createElement('div')
+  firstGrandParent.innerHTML = title
+  const secondGrandParent = document.createElement('div')
+  secondGrandParent.innerHTML = description
+  const thirdGrandParent = document.createElement('button')
+  thirdGrandParent.innerHTML = 'Mark as done'
+  thirdGrandParent.setAttribute('onclick', `markAsDone(${id})`)
+  child.appendChild(firstGrandParent)
+  child.appendChild(secondGrandParent)
+  child.appendChild(thirdGrandParent)
+  child.setAttribute('id', id)
+  return child
 }
 
-//State will always be anarray
-//every element of state will be have an title, description and id 
+//State will always be an array
+//every element of state will be have an title, description and id
 
 function updateDomAccToState(state) {
-    const parent = document.getElementById("container")
-    parent.innerHTML = ""
-    for (let i = 0; i < state.length; i++) {
-        const child = createChild(state[i].title, state[i].description, state[i].id)
-        parent.appendChild(child)
-    }
+  const parent = document.getElementById('container')
+  parent.innerHTML = ''
+  for (let i = 0; i < state.length; i++) {
+    const child = createChild(state[i].title, state[i].description, state[i].id)
+    parent.appendChild(child)
+  }
 }
 
 window.setInterval(async function () {
-    const res = await fetch("http://localhost:3000/todos")
-    const json = await res.json();
-    console.log(json.todos)
-    updateDomAccToState(json.todos);
-
+  const res = await fetch('http://localhost:3000/todos')
+  const json = await res.json()
+  console.log(json.todos)
+  updateDomAccToState(json.todos)
 }, 5000)
 
 // function addTodo() {
