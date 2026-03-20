@@ -52,7 +52,7 @@ async function fetchTodos() {
   updateDomAccToState(json.todos)
 }
 
-fetchTodos()
+setInterval(fetchTodos, 5000)
 
 async function toggleTodo(id) {
   await fetch(`http://localhost:3000/todos/${id}`, {
@@ -80,17 +80,16 @@ async function toggleTodo(id) {
 //
 // modern ui programming (like react, or the dom element creation at the top of this file) updates efficiently by creating/updating only the necessary elements rather than wiping out the entire container.
 
-// Ugly Approach
+// ugly approach
 // const originalContainer = document.getElementById('container').innerHTML
 // document.getElementById('container').innerHTML =
 //   originalContainer +
 //   `
-//         <br />
+//        <br />
 //        <div>
 //         <div>${title}</div>
 //         <div>${description}</div>
 //         <br />
 //         <button>Mark as done</button>
 //       </div>
-
-// // `
+//       `

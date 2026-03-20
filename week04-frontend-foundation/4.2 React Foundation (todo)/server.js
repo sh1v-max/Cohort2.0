@@ -44,16 +44,16 @@ app.get('/', (req, res) => {
 })
 
 app.get('/todos', (req, res) => {
-  // const randomTodos = []
-  // for (let i = 0; i < 5; i++) {
-  //   if (Math.random() > 0.5) {
-  //     randomTodos.push(todos[i])
-  //   }
-  // }
-  // res.json({
-  //   todos: randomTodos,
-  // })
-  res.json({ todos })
+  const randomTodos = []
+  for (let i = 0; i < 5; i++) {
+    if (Math.random() > 0.5) {
+      randomTodos.push(todos[i])
+    }
+  }
+  res.json({
+    todos: randomTodos,
+  })
+  // res.json({ todos })
 })
 
 // update todo as done
