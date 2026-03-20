@@ -6,24 +6,29 @@
 
 // let globalId = 1;
 
-//     function markAsDone(todoId) {
-//       const parent = document.getElementById(todoId);
-//       parent.children[2].innerHTML = "Done!"
-//     }
-
-function createChild(title, description, id) {
+function createChild(todo) {
   const child = document.createElement('div')
-  const firstGrandParent = document.createElement('div')
-  firstGrandParent.innerHTML = title
-  const secondGrandParent = document.createElement('div')
-  secondGrandParent.innerHTML = description
-  const thirdGrandParent = document.createElement('button')
-  thirdGrandParent.innerHTML = 'Mark as done'
-  thirdGrandParent.setAttribute('onclick', `markAsDone(${id})`)
-  child.appendChild(firstGrandParent)
-  child.appendChild(secondGrandParent)
-  child.appendChild(thirdGrandParent)
-  child.setAttribute('id', id)
+
+  const titleDiv = document.createElement('div')
+  titleDiv.innerHTML = todo.title
+
+  const descDiv = document.createElement('div')
+  descDiv.innerHTML = todo.description
+
+  const button = document.createElement('button')
+
+  button.innerHTML = todo.completed ? 'Done' : 'Mark as done'
+
+  button.addEventListener('click', () => {
+    toggleTodo(todo.id)
+  })
+
+  child.appendChild(titleDiv)
+  child.appendChild(descDiv)
+  child.appendChild(button)
+
+  child.setAttribute('id', todo.id)
+
   return child
 }
 
@@ -32,19 +37,32 @@ function createChild(title, description, id) {
 
 function updateDomAccToState(state) {
   const parent = document.getElementById('container')
+
   parent.innerHTML = ''
+
   for (let i = 0; i < state.length; i++) {
-    const child = createChild(state[i].title, state[i].description, state[i].id)
+    const child = createChild(state[i])
     parent.appendChild(child)
   }
 }
 
-window.setInterval(async function () {
+async function fetchTodos() {
   const res = await fetch('http://localhost:3000/todos')
   const json = await res.json()
-  console.log(json.todos)
   updateDomAccToState(json.todos)
-}, 5000)
+}
+
+fetchTodos()
+
+async function toggleTodo(id) {
+  await fetch(`http://localhost:3000/todos/${id}`, {
+    method: 'PUT',
+  })
+
+  const res = await fetch('http://localhost:3000/todos')
+  const json = await res.json()
+  updateDomAccToState(json.todos)
+}
 
 // function addTodo() {
 //   const title = document.getElementById('title').value

@@ -56,6 +56,18 @@ app.get('/todos', (req, res) => {
   res.json({ todos })
 })
 
+// update todo as done
+app.put('/todos/:id', (req, res) => {
+  const id = parseInt(req.params.id)
+
+  const todo = todos.find((t) => t.id === id)
+  if (todo) {
+    todo.completed = !todo.completed
+  }
+
+  res.json({ message: 'Updated' })
+})
+
 app.listen(port, () => {
   console.log(`App running on port ${port}`)
 })
