@@ -52,6 +52,10 @@ function updateState(newTodos) {
   const deleted = []
   const updated = []
 
+  console.log('Added:', added)
+  console.log('Deleted:', deleted)
+  console.log('Updated:', updated)
+
   // find out what todos are added or updated
   for (let i = 0; i < newTodos.length; i++) {
     const newTodo = newTodos[i]
@@ -115,7 +119,7 @@ function addTodo() {
 function markAsDone(id) {
   const todoIndex = todoState.findIndex((todo) => todo.id === id)
   if (todoIndex > -1) {
-    todoState[todoIndex].completed = true
+    todoState[todoIndex].completed = !todoState[todoIndex].completed
     updateState(todoState)
   }
 }
