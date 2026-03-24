@@ -7,11 +7,13 @@ mongoose.connect(
 )
 
 // Define schemas
+// Define schema for admins
 const AdminSchema = new mongoose.Schema({
   username: { type: String, required: true },
   password: { type: String, required: true },
 })
 
+// Define schema for users, including a reference to courses they've purchased
 const UserSchema = new mongoose.Schema({
   username: { type: String, required: true },
   password: { type: String, required: true },
@@ -23,6 +25,7 @@ const UserSchema = new mongoose.Schema({
   ],
 })
 
+// Define schema for courses including details and publish status
 const CourseSchema = new mongoose.Schema({
   title: String,
   description: String,
@@ -31,6 +34,7 @@ const CourseSchema = new mongoose.Schema({
   published: { type: Boolean, default: true },
 })
 
+// Compile schemas into models for database interaction
 const Admin = mongoose.model('Admin', AdminSchema)
 const User = mongoose.model('User', UserSchema)
 const Course = mongoose.model('Course', CourseSchema)
