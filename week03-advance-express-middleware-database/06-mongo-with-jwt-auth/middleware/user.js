@@ -1,22 +1,36 @@
 const { User } = require('../db')
+const jwt = require('jsonwebtoken')
+const { JWT_SECRET } = require('../config')
 
 // Middleware to authenticate user requests
 async function userMiddleware(req, res, next) {
-  // Extract credentials from request headers
-  const username = req.headers.username
-  const password = req.headers.password
-
-  if (!username || !password) {
-    return res.status(403).json({ message: 'missing credentials' })
+  const authHeader = req.headers.authorization
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(403).json({ message: 'missing credentials or invalid format' })
   }
 
-  // Look for the user in the database matching these credentials
-  const user = await User.findOne({ username, password })
-  if (user) {
-    // Attach the authenticated user object to request so downstream routes can use it
-    req.user = user
-    next()
-  } else {
+  // getting token
+  // token usually looks like "Bearer <token>"
+  // so we split the string by space and take the second element
+  // ["Bearer", "<token>"]
+  const words = authHeader.split(" ")
+  const token = words[1]
+
+  try {
+    const decodedValue = jwt.verify(token, JWT_SECRET)
+    if (decodedValue.username) {
+      // look for the user in the database to attach full user object
+      const user = await User.findOne({ username: decodedValue.username })
+      if (user) {
+        req.user = user
+        next()
+      } else {
+        res.status(403).json({ message: 'user not found' })
+      }
+    } else {
+      res.status(403).json({ message: 'user authentication failed' })
+    }
+  } catch (err) {
     res.status(403).json({ message: 'user authentication failed' })
   }
 }
