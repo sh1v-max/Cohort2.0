@@ -1,4 +1,6 @@
 const { Router } = require('express')
+const jwt = require('jsonwebtoken')
+const { JWT_SECRET } = require('../config')
 const userMiddleware = require('../middleware/user')
 const { User, Course } = require('../db')
 
@@ -24,8 +26,16 @@ router.post('/signup', async (req, res) => {
   }
 })
 
-router.post('/signin', (req, res) => {
-  // Implement admin signup logic
+router.post('/signin', async (req, res) => {
+  const { username, password } = req.body
+
+  const user = await User.findOne({ username, password })
+  if (user) {
+    const token = jwt.sign({ username }, JWT_SECRET)
+    res.json({ token })
+  } else {
+    res.status(411).json({ message: 'Incorrect username or password' })
+  }
 })
 
 // Route for users to explore all published courses
