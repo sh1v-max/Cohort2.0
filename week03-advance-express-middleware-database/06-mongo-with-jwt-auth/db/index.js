@@ -3,7 +3,7 @@ require('dotenv').config()
 
 // Connect to MongoDB
 mongoose.connect(
-  process.env.MONGO_URI + 'course_selling_app',
+  process.env.MONGO_URI + 'course_selling_app2',
 )
 
 // Define schemas
