@@ -1,20 +1,29 @@
-const { Admin } = require('../db')
+const jwt = require('jsonwebtoken')
+const { JWT_SECRET } = require('../config')
 
 // Middleware to authenticate admin requests
-async function adminMiddleware(req, res, next) {
-  // Extract credentials from request headers
-  const username = req.headers.username
-  const password = req.headers.password
-
-  if (!username || !password) {
-    return res.status(403).json({ message: 'missing credentials' })
+function adminMiddleware(req, res, next) {
+  const authHeader = req.headers.authorization
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(403).json({ message: 'missing credentials or invalid format' })
   }
 
-  // Query DB to find match for these credentials
-  const admin = await Admin.findOne({ username, password })
-  if (admin) {
-    next()
-  } else {
+  // getting token
+  // token usually looks like "Bearer <token>"
+  // so we split the string by space and take the second element
+  // ["Bearer", "<token>"]
+  const words = authHeader.split(" ")
+  const token = words[1]
+
+  // verifying token
+  try {
+    const decodedValue = jwt.verify(token, JWT_SECRET)
+    if (decodedValue.username) {
+      next()
+    } else {
+      res.status(403).json({ message: 'admin authentication failed' })
+    }
+  } catch (err) {
     res.status(403).json({ message: 'admin authentication failed' })
   }
 }
