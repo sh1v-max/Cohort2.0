@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Website Example</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .card { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; border-radius: 5px; }
+        button { padding: 8px 16px; margin-bottom: 20px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Dynamic Projects Viewer</h1>
+    <!-- An empty container where JavaScript will dynamically insert content -->
+    <button id="loadBtn">Load Projects dynamically</button>
+    <div id="projects-container"></div>
+
+    <script>
+        // Data usually coming from a backend API or Database
+        const dynamicData = [
+            { id: 1, title: "React Task Tracker", desc: "A task tracker app that updates in real time." },
+            { id: 2, title: "E-commerce Store", desc: "An app that fetches live products and manages a cart." },
+            { id: 3, title: "Weather App", desc: "Fetches live weather data based on location." }
+        ];
+
+        // This function dynamically generates HTML based on the data array (State)
+        function renderProjects() {
+            const container = document.getElementById("projects-container");
+            container.innerHTML = ""; // Clear existing first
+            
+            // Loop over our dynamic data to create DOM elements
+            dynamicData.forEach(project => {
+                const card = document.createElement("div");
+                card.className = "card"; // Assign class programmatically
+                
+                const title = document.createElement("h3");
+                title.innerText = `Project ${project.id}: ${project.title}`;
+                
+                const desc = document.createElement("p");
+                desc.innerText = project.desc;
+                
+                // Append created elements to the card, then to the container
+                card.appendChild(title);
+                card.appendChild(desc);
+                container.appendChild(card);
+            });
+        }
+
+        // We listen for user interactions to change what the page displays
+        document.getElementById("loadBtn").addEventListener("click", () => {
+            renderProjects(); // The website dynamically updates!
+        });
+    </script>
+</body>
+</html>
