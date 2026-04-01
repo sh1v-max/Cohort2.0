@@ -3,6 +3,8 @@ const { createTodo, updateTodo } = require('./types')
 
 const express = require('express')
 const app = express()
+// make sure you install cors too, it is used for connecting frontend and backend
+// without it, you won't be able to hit backend using your frontend
 const cors = require('cors')
 
 app.use(express.json())
