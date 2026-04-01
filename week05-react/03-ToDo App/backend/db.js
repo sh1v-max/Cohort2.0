@@ -6,12 +6,9 @@
 // }
 
 const mongoose = require('mongoose')
+require('dotenv').config()
 
-// put link in .env file
-// mongodb+srv://singhshiv0427_db_user:5r8wNtjnJc95RrHE@cluster0.farurxz.mongodb.net/
-mongoose.connect(
-  'mongodb+srv://singhshiv0427_db_user:5r8wNtjnJc95RrHE@cluster0.farurxz.mongodb.net/todos',
-)
+mongoose.connect(`${process.env.MONGO_URI}todos`)
 
 const todoSchema = mongoose.Schema({
   title: String,
