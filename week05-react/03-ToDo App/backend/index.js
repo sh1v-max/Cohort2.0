@@ -12,6 +12,11 @@ app.use(cors())
 //   title: "string",
 //   description: "string"
 // }
+
+app.get('/', function(req, res){
+  res.send('hello world')
+})
+
 app.post('/todo', async function (req, res) {
   try {
     const createPayload = req.body
@@ -82,4 +87,6 @@ app.put('/completed', async function (req, res) {
   })
 })
 
-app.listen(3000)
+app.listen(3000, function(){
+  console.log('server is running on port 3000')
+})
