@@ -19,10 +19,10 @@ export default function WrapperComponents() {
         </GoodCard>
       </div>
     </div>
-  );
+  )
 }
 
-// ❌ wrong way: hard to customize the inside of the card. 
+// ❌ wrong way: hard to customize the inside of the card.
 // what if we want a button inside the content? we can't easily do it.
 function BadCard({ title, content }) {
   return (
@@ -30,18 +30,16 @@ function BadCard({ title, content }) {
       <h4>{title}</h4>
       <p>{content}</p>
     </div>
-  );
+  )
 }
 
-// ✅ correct way: the component just provides the "shell", 
+// ✅ correct way: the component just provides the "shell",
 // and renders whatever is passed as `children` inside it.
 function GoodCard({ title, children }) {
   return (
     <div style={{ padding: 10, border: '1px solid gray' }}>
       <h4>{title}</h4>
-      <div style={{ padding: '10px', backgroundColor: '#444' }}>
-        {children}
-      </div>
+      <div style={{ padding: '10px', backgroundColor: '#444' }}>{children}</div>
     </div>
-  );
+  )
 }
