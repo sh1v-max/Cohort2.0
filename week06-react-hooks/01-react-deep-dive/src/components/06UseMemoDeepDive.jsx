@@ -13,10 +13,10 @@ export default function UseMemoDeepDive() {
     return num * 2
   }
 
-  // ❌ wrong way (will run every single time the component renders!)
+  // wrong way (will run every single time the component renders!)
   // const doubledCount = slowMathFunction(count);
 
-  // ✅ correct way: useMemo caches the result.
+  // correct way: useMemo caches the result.
   // it ONLY re-runs if `count` changes, not if `theme` changes.
   const doubledCount = useMemo(() => {
     return slowMathFunction(count)
