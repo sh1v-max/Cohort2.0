@@ -9,6 +9,7 @@ import UseMemoDeepDive from './components/06UseMemoDeepDive';
 import UseCallbackDeepDive from './components/07UseCallbackDeepDive';
 import UseRefDeepDive from './components/08UseRefDeepDive';
 import StateManagement from './components/09StateManagement';
+import HelperComponent from './components/10HelperComponent';
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
       <UseCallbackDeepDive />
       <UseRefDeepDive />
       <StateManagement />
+      <HelperComponent />
     </div>
   )
 }

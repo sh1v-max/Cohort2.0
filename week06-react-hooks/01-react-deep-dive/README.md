@@ -41,6 +41,7 @@ For the best learning experience, follow this workflow:
 - `07-useCallback` - Caching function *definitions*.
 - `08-useRef` - Accessing DOM and silently keeping states.
 - `09-state-management` - Lifting state up and avoiding trapped state.
+- `10-helper-component` - Reusable helper components (ShowIf, Loader, EachItem).
 
 ## ⚠️ Important Constraint
 This project is deliberately minimal. 
