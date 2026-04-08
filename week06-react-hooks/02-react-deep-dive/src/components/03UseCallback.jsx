@@ -16,7 +16,7 @@ export default function UseCallbackDeepDive() {
 
   return (
     <div className="card">
-      <h2>2. useCallback</h2>
+      <h2>3. useCallback</h2>
       
       <p>main count: {count}</p>
       <button onClick={() => setCount(count + 1)}>increase count</button>

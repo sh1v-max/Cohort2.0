@@ -20,7 +20,7 @@ export default function PropDrillingDemo() {
 
   return (
     <div className="card">
-      <h2>5. Prop Drilling</h2>
+      <h2>6. Prop Drilling</h2>
       <p>
         the <code>user</code> object and <code>toggleTheme</code> function live
         here in the top-level component. watch how they have to pass through

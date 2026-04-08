@@ -69,7 +69,7 @@ export default function CustomHooksDemo() {
         color: isDarkMode ? '#eee' : 'rgba(255, 255, 255, 0.87)',
       }}
     >
-      <h2>4. Custom Hooks</h2>
+      <h2>5. Custom Hooks</h2>
 
       {/* useWindowWidth demo */}
       <div className="correct-example card" style={{ marginBottom: '15px' }}>
