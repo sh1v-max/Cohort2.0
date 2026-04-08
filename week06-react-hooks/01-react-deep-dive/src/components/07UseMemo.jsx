@@ -30,7 +30,7 @@ export default function UseMemoDeepDive() {
         color: theme === 'dark' ? 'white' : 'black',
       }}
     >
-      <h2>6. useMemo</h2>
+      <h2>7. useMemo</h2>
 
       <p>count: {count}</p>
       <p>expensive doubled count: {doubledCount}</p>

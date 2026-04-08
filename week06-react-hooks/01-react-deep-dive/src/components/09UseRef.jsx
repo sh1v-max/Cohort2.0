@@ -30,7 +30,7 @@ export default function UseRefDeepDive() {
 
   return (
     <div className="card">
-      <h2>8. useRef</h2>
+      <h2>9. useRef</h2>
       
       <div className="correct-example card" style={{ marginBottom: '20px' }}>
         <h3>useRef for Values</h3>

@@ -13,7 +13,7 @@ export default function HelperComponent() {
 
   return (
     <div className="card">
-      <h2>10. Helper Components</h2>
+      <h2>11. Helper Components</h2>
       <p>
         small, reusable components that handle common UI patterns like
         conditional rendering, loading states, and list rendering.

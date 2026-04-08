@@ -5,7 +5,7 @@ export default function UseEffectDeepDive() {
 
   return (
     <div className="card">
-      <h2>5. useEffect</h2>
+      <h2>6. useEffect</h2>
       <p>open your console to see the effects in action!</p>
 
       <button onClick={() => setToggle(!toggle)}>
