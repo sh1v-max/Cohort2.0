@@ -100,7 +100,10 @@ export default function CustomHooksDemo() {
             marginRight: '8px',
           }}
         />
-        <p>refresh the page — your name will persist! (it's saved in localStorage)</p>
+        <p>
+          refresh the page — your name will persist! (it's saved in
+          localStorage)
+        </p>
       </div>
 
       {/* useToggle demo */}

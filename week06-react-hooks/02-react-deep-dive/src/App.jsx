@@ -1,19 +1,21 @@
 import React from 'react'
 
-import UseEffectDeepDive from './components/01UseEffectDeepDive'
-import UseCallbackDeepDive from './components/02UseCallbackDeepDive'
-import UseMemoDeepDive from './components/03UseMemoDeepDive'
-import CustomHooksDemo from './components/04CustomHooks'
-import PropDrillingDemo from './components/05PropDrilling'
+import UseState from './components/01UseState'
+import UseEffect from './components/02UseEffect'
+import UseCallback from './components/03UseCallback'
+import UseMemo from './components/04UseMemo'
+import CustomHooksDemo from './components/05CustomHooks'
+import PropDrillingDemo from './components/06PropDrilling'
 
 const App = () => {
   return (
     <div className="container">
       <h1>React Deep Dive — Part 2</h1>
 
-      <UseEffectDeepDive />
-      <UseCallbackDeepDive />
-      <UseMemoDeepDive />
+      <UseState />
+      <UseEffect />
+      <UseCallback />
+      <UseMemo />
       <CustomHooksDemo />
       <PropDrillingDemo />
     </div>

@@ -36,7 +36,7 @@ function Timer() {
     }
   }, []) // empty dependency array = run ONCE on mount
 
-  // ❌ wrong way (uncomment at your own risk!):
+  // wrong way:
   // useEffect(() => {
   //   // missing dependency array means this runs on EVERY render.
   //   // setting state here triggers a render, causing an infinite loop!

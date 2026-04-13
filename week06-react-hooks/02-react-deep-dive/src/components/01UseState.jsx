@@ -20,9 +20,9 @@ export default function UseStateDeepDive() {
     // setCount(count + 1)
 
     // ✅ right way (uses the previous value each time):
-    setCount(prev => prev + 1)
-    setCount(prev => prev + 1)
-    setCount(prev => prev + 1)
+    setCount((prev) => prev + 1)
+    setCount((prev) => prev + 1)
+    setCount((prev) => prev + 1)
   }
 
   // 3. object state – you must spread the old state, never mutate directly
@@ -71,14 +71,12 @@ export default function UseStateDeepDive() {
           name: {user.name}, age: {user.age}
         </p>
         <button
-          onClick={() =>
-            setUser(prev => ({ ...prev, age: prev.age + 1 }))
-          }
+          onClick={() => setUser((prev) => ({ ...prev, age: prev.age + 1 }))}
         >
           increment age
         </button>
         <pre style={{ fontSize: '0.8em', whiteSpace: 'pre-wrap' }}>
-{`// ✅ correct
+          {`// ✅ correct
 setUser(prev => ({ ...prev, age: prev.age + 1 }))
 
 // ❌ wrong – mutating directly does NOT trigger a re-render
@@ -91,14 +89,14 @@ setUser(prev => ({ ...prev, age: prev.age + 1 }))
       <div className="correct-example card">
         <h3>Array State</h3>
         <p>fruits: {fruits.join(', ')}</p>
-        <button onClick={() => setFruits(prev => [...prev, '🍇'])}>
+        <button onClick={() => setFruits((prev) => [...prev, '🍇'])}>
           add grape
         </button>{' '}
-        <button onClick={() => setFruits(prev => prev.slice(0, -1))}>
+        <button onClick={() => setFruits((prev) => prev.slice(0, -1))}>
           remove last
         </button>
         <pre style={{ fontSize: '0.8em', whiteSpace: 'pre-wrap' }}>
-{`// ✅ correct – create new array
+          {`// ✅ correct – create new array
 setFruits(prev => [...prev, '🍇'])
 
 // ❌ wrong – push mutates in place
@@ -115,7 +113,7 @@ setFruits(prev => [...prev, '🍇'])
           expensive computation only runs on the first render.
         </p>
         <pre style={{ fontSize: '0.8em', whiteSpace: 'pre-wrap' }}>
-{`// ✅ lazy – runs once
+          {`// ✅ lazy – runs once
 const [val] = useState(() => heavyCompute())
 
 // ❌ eager – runs every render!
