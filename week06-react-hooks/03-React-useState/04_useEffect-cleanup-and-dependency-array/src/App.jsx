@@ -25,7 +25,8 @@ function App() {
       {/* Display the main heading */}
       <h1>useEffect Cleanup and Dependency Array</h1>
 
-      {/* Render the Counter component and pass 'count1' and 'count2' as props */}
+      {/* Render the Counter component and pass 'count1' and 'count2' as props
+       */}
       <Counter count1={count1} count2={count2} />
 
       {/* Button to trigger 'increaseCount' function when clicked */}
