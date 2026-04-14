@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react'
 
 const UseEffect = () => {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState([])
   useEffect(() => {
-    fetch("https://dummyjson.com/todos").then(async function (res) {
-      const json = await res.json();
-      setTodos(json.todos);
-      console.log(todos);
-    });
-  }, []);
+    fetch('https://dummyjson.com/todos').then(async function (res) {
+      const json = await res.json()
+      setTodos(json.todos)
+      console.log(todos)
+    })
+  }, [])
 
   return (
     <div>
@@ -19,7 +19,7 @@ const UseEffect = () => {
         </ul>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default UseEffect;
+export default UseEffect
