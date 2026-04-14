@@ -4,22 +4,17 @@ export default function UseMemoDeepDive() {
   const [count, setCount] = useState(0)
   const [theme, setTheme] = useState('dark')
 
-  // an expensive function that simulates heavy math
-  const slowMathFunction = (num) => {
-    console.log('running expensive math...')
-    for (let i = 0; i <= 10000000; i++) {
-      // console.log(i)
-    } // fake delay
-    return num * 2
-  }
-
   // wrong way (will run every single time the component renders!)
-  // const doubledCount = slowMathFunction(count);
+  // const doubledCount = count * 2;
 
   // correct way: useMemo caches the result.
   // it ONLY re-runs if `count` changes, not if `theme` changes.
   const doubledCount = useMemo(() => {
-    return slowMathFunction(count)
+    console.log('running expensive math...')
+    for (let i = 0; i <= 10000000; i++) {
+      // fake delay
+    }
+    return count * 2
   }, [count])
 
   return (

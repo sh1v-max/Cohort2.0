@@ -10,6 +10,10 @@ export default function UseCallbackDeepDive() {
 
   // correct way: useCallback caches the function definition itself.
   // it only re-creates the function if dependencies change.
+
+  // useCallback is not about minimizing the amount of code that is run
+  // useCallback is about not rendering a child component, if the function hasn't/doesn't change across renders
+
   const showAlert = useCallback(() => {
     alert('button clicked! count is: ' + count)
   }, [count])
@@ -20,7 +24,7 @@ export default function UseCallbackDeepDive() {
 
       <p>main count: {count}</p>
       <button onClick={() => setCount(count + 1)}>increase count</button>
-
+  
       <br />
 
       <button onClick={() => setOtherState(!otherState)}>
