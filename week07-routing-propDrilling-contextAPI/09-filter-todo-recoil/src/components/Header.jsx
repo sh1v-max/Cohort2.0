@@ -1,4 +1,4 @@
-import { CheckSquare } from 'lucide-react';
+import { CheckSquare } from 'lucide-react'
 
 export default function Header() {
   return (
@@ -7,7 +7,9 @@ export default function Header() {
         <CheckSquare className="text-indigo-500" size={36} />
         Tasks
       </h1>
-      <p className="text-slate-500 mt-2 text-sm sm:text-base">Stay organized and manage your day.</p>
+      <p className="text-slate-500 mt-2 text-sm sm:text-base">
+        Stay organized and manage your day.
+      </p>
     </div>
-  );
+  )
 }

@@ -1,12 +1,12 @@
-import { useRecoilState } from 'recoil';
-import { todoFilterState } from '../recoil/atoms';
+import { useRecoilState } from 'recoil'
+import { todoFilterState } from '../recoil/atoms'
 
 export default function FilterBar() {
-  const [filter, setFilter] = useRecoilState(todoFilterState);
+  const [filter, setFilter] = useRecoilState(todoFilterState)
 
   const updateFilter = (newFilter) => () => {
-    setFilter(newFilter);
-  };
+    setFilter(newFilter)
+  }
 
   return (
     <div className="flex bg-slate-50 p-1.5 rounded-full mb-6 border border-slate-200">
@@ -29,5 +29,5 @@ export default function FilterBar() {
         Completed
       </button>
     </div>
-  );
+  )
 }
