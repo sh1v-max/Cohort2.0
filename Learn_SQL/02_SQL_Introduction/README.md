@@ -1,53 +1,257 @@
-# Phase 3: Querying - Master Data Retrieval
+# Module 02: Your First SQL Code
 
-## What You'll Learn
+## 🎯 What You'll Do
 
-Querying is the art of **getting exactly the data you need** from tables using filters, sorting, and limiting results.
+In the next 30 minutes, you'll:
+1. Create your first database
+2. Create tables for users, posts, comments
+3. Insert sample data
+4. Query the data
+5. See it work!
 
-## Topics Covered
+## 📁 Files Here
 
-1. **WHERE Clause**
-   - Basic comparison operators (=, !=, <, >, <=, >=)
-   - Logical operators (AND, OR, NOT)
-   - Combining multiple conditions
+- **first_code.sql** - Your first complete SQL program
+- **README.md** - This guide
 
-2. **Filtering Operators**
-   - LIKE - Pattern matching
-   - BETWEEN - Range filtering
-   - IN - Multiple values
-   - IS NULL - Check for NULL values
+## 🚀 How to Run first_code.sql
 
-3. **ORDER BY**
-   - Ascending (ASC) and Descending (DESC)
-   - Multiple columns
-   - Using column position
+### Option 1: MySQL Workbench (Recommended)
 
-4. **LIMIT and OFFSET**
-   - Limiting row count
-   - Pagination with OFFSET
-   - TOP N queries
+1. Open **MySQL Workbench**
+2. Click your `practice` connection
+3. Open a new query tab (File → New Query Tab)
+4. Copy the entire code from **first_code.sql**
+5. Paste it into the query tab
+6. Click the **lightning bolt icon** (Execute)
+7. Watch the results!
 
-5. **DISTINCT**
-   - Remove duplicates
-   - Distinct with WHERE
-   - Distinct with multiple columns
+### Option 2: VS Code with SQLTools
 
-6. **Aliases**
-   - Column aliases (AS)
-   - Table aliases
-   - Making results readable
+1. Open **VS Code**
+2. Create a new file: `first_code.sql`
+3. Copy-paste code from **first_code.sql**
+4. Select all text (Ctrl+A)
+5. Right-click → **Run Selected Query**
+6. See results in Output panel
 
-## Why This Matters for Interviews
+### Option 3: Command Line
 
-**Interview Question Example:**
-> "Write a query to find all customers from 'USA' who have made orders, sorted by order count descending, showing top 10."
+1. Open **Command Prompt**
+2. Navigate to your Learn_SQL folder:
+   ```bash
+   cd "path/to/Learn_SQL/02_SQL_Introduction"
+   ```
+3. Run the file:
+   ```bash
+   mysql -u root -p < first_code.sql
+   ```
+4. Enter your MySQL password
 
-### Common Interview Questions
+## 📝 What first_code.sql Does
 
-1. "Write a query with multiple WHERE conditions"
-2. "How do you find records that DON'T match a pattern?"
-3. "What's the difference between WHERE and HAVING?"
-4. "How do you implement pagination?"
+### Step 1: Create Database
+```sql
+CREATE DATABASE practice;
+USE practice;
+```
+- Creates a new database called `practice`
+- Selects it for use
+
+### Step 2: Create Users Table
+```sql
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  age INT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+**What this means:**
+- `id` - Unique identifier (automatically increases)
+- `name` - Text (required)
+- `email` - Text (must be unique, required)
+- `age` - Number (optional)
+- `created_at` - Auto-set to current date/time
+
+### Step 3: Create Posts Table
+```sql
+CREATE TABLE posts (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  title VARCHAR(200) NOT NULL,
+  content TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
+```
+
+**What this means:**
+- `user_id` connects to users table
+- `FOREIGN KEY` ensures every post has a real user
+- `TEXT` for longer content
+
+### Step 4: Create Comments Table
+```sql
+CREATE TABLE comments (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  post_id INT NOT NULL,
+  user_id INT NOT NULL,
+  body TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (post_id) REFERENCES posts(id),
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
+```
+
+**What this means:**
+- Comments connect to both posts and users
+- Multiple foreign keys link data together
+
+### Step 5: Insert Data
+
+```sql
+INSERT INTO users (name, email, age)
+VALUES 
+  ('Wazir', 'wazir@example.com', 24),
+  ('Ritik', 'ritik@example.com', 24),
+  ('Crescha', 'crescha@example.com', 23),
+  ('Priya', 'priya@example.com', 26),
+  ('Arjun', 'arjun@example.com', 28);
+```
+
+Adds 5 users to the table.
+
+### Step 6: Query Data
+
+```sql
+SELECT * FROM users;
+SELECT * FROM posts;
+SELECT * FROM comments;
+```
+
+Gets all data from each table.
+
+## 📊 What the Data Looks Like
+
+After running first_code.sql:
+
+### Users Table
+```
+id | name    | email                | age | created_at
+---|---------|----------------------|-----|-------------------
+1  | Wazir   | wazir@example.com   | 24  | 2024-05-29 12:34:56
+2  | Ritik   | ritik@example.com   | 24  | 2024-05-29 12:34:56
+3  | Crescha | crescha@example.com | 23  | 2024-05-29 12:34:56
+4  | Priya   | priya@example.com   | 26  | 2024-05-29 12:34:56
+5  | Arjun   | arjun@example.com   | 28  | 2024-05-29 12:34:56
+```
+
+### Posts Table
+```
+id | user_id | title              | content                    | created_at
+---|---------|--------------------|-----------------------------|-------------------
+1  | 1       | My React Journey   | Started learning React...  | 2024-05-29 12:34:56
+2  | 1       | DSA in JavaScript  | 100 days of solving...     | 2024-05-29 12:34:56
+3  | 2       | Life in Bengaluru  | Moving to the city...      | 2024-05-29 12:34:56
+... (5 total posts)
+```
+
+### Comments Table
+```
+id | post_id | user_id | body                                | created_at
+---|---------|---------|-------------------------------------|-------------------
+1  | 1       | 2       | Great post Wazir, very relatable! | 2024-05-29 12:34:56
+2  | 1       | 3       | I had the same experience...      | 2024-05-29 12:34:56
+... (5 total comments)
+```
+
+## 🎯 Exercises After Running
+
+Once you've run first_code.sql, try these queries:
+
+### 1. Find a specific user
+```sql
+SELECT * FROM users WHERE name = 'Wazir';
+```
+
+### 2. Get all posts from user_id = 1
+```sql
+SELECT * FROM posts WHERE user_id = 1;
+```
+
+### 3. Count total users
+```sql
+SELECT COUNT(*) FROM users;
+```
+
+### 4. Get all comments
+```sql
+SELECT * FROM comments;
+```
+
+### 5. Find user's email
+```sql
+SELECT email FROM users WHERE name = 'Priya';
+```
+
+## ✅ Checklist
+
+After running first_code.sql:
+
+- [ ] Saw "Query OK" messages
+- [ ] Database `practice` exists
+- [ ] Tables created: users, posts, comments
+- [ ] Data inserted successfully
+- [ ] Could run queries and see results
+
+## 🎓 What You Learned
+
+You just:
+1. ✅ Created a database
+2. ✅ Designed 3 tables with relationships
+3. ✅ Inserted sample data
+4. ✅ Queried the data
+5. ✅ Understood database structure
+
+**That's a complete database system!**
+
+## 🚀 What's Next?
+
+Now that you understand database structure, let's learn:
+
+Go to: `03_Basic_SELECT_Queries/README.md`
+
+You'll:
+- Master the SELECT statement
+- Learn to choose specific columns
+- Filter and sort data
+- Write professional queries
+
+---
+
+## 💭 Common Questions
+
+### "What's AUTO_INCREMENT?"
+Automatically assigns a number: user 1, user 2, user 3, etc.
+
+### "What's PRIMARY KEY?"
+A unique identifier for each row. No duplicates allowed.
+
+### "What's FOREIGN KEY?"
+A link to another table. Ensures data consistency.
+
+### "What's NOT NULL?"
+Field must have a value. Can't be empty.
+
+### "What's UNIQUE?"
+Each value can appear only once. No duplicate emails!
+
+---
+
+**Understanding databases? Great! Now master SELECT queries →**
 5. "How do you find duplicate values?"
 6. "What's the most efficient way to get top N records?"
 7. "When would you use LIKE vs = operator?"

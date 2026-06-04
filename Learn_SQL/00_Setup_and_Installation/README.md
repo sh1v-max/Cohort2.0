@@ -1,200 +1,228 @@
-# Module 00: Setup & Environment Configuration
+# Module 00: MySQL Setup & Installation
 
 ## 📋 Overview
 
-Get your PostgreSQL environment ready for a complete SQL learning journey.
+Get MySQL ready for your SQL learning journey. This takes about 1 hour.
 
-## 🎯 Learning Objectives
+## 🎯 What You'll Do
 
-- Install PostgreSQL on Windows
-- Set up pgAdmin (web-based client)
+- Install MySQL Server
+- Verify it works
+- Connect from command line
 - Create your first database
-- Verify your installation
-- Understand basic connection concepts
-
-## 📚 Topics Covered
-
-1. PostgreSQL installation
-2. User and role creation
-3. Database creation
-4. Connection strings
-5. pgAdmin setup and navigation
-6. Command-line tools (psql)
 
 ## ⏱️ Time Estimate: 45-60 minutes
 
 ---
 
-## Step 1: Download & Install PostgreSQL
+## Step 1: Download MySQL Server
 
-### Windows Installation:
+### For Windows:
 
-1. Visit: https://www.postgresql.org/download/windows/
-2. Download the latest version (PostgreSQL 15+ recommended)
+1. Go to: https://dev.mysql.com/downloads/mysql/
+2. Select **Windows (x86, 64-bit)** - MSI Installer
+3. Click **Download**
+4. File size: ~200MB
+5. Save it to your computer
+
+### Alternative (Easier):
+Use MySQL installer:
+- Go to: https://dev.mysql.com/downloads/installer/
+- Download: `mysql-installer-community-8.x.x.msi`
+
+---
+
+## Step 2: Install MySQL Server
+
+1. Run the installer file (`.msi`)
+2. Choose **Setup Type**: Select **Developer Default**
+3. Follow the installation wizard (click Next)
+4. When asked about **MySQL Server Instance Configuration**:
+   - **Port**: Keep default `3306`
+   - **MySQL Server type**: Choose `Development Machine`
+5. When asked for **MySQL Root Password**:
+   - Set a simple password (e.g., `root` or `password123`)
+   - **Write this down!** You'll need it
+6. Complete the installation
+7. MySQL should start automatically
+
+---
+
+## Step 3: Verify MySQL is Running
+
+Open **Command Prompt** and run:
+
+```bash
+mysql --version
+```
+
+You should see something like:
+```
+mysql  Ver 8.0.33 for Windows on x86_64
+```
+
+If you get "command not found", MySQL is not in your PATH. See troubleshooting below.
+
+---
+
+## Step 4: Test Connection
+
+Open **Command Prompt** and run:
+
+```bash
+mysql -u root -p
+```
+
+It will ask for password. Enter the password you set in Step 2.
+
+You should see:
+```
+mysql>
+```
+
+This means you're connected! Type `exit` to quit.
+
+---
+
+## Step 5: Install MySQL Workbench (Recommended)
+
+MySQL Workbench is a GUI tool that makes MySQL easier to use.
+
+1. Go to: https://dev.mysql.com/downloads/workbench/
+2. Download **MySQL Workbench** (it's free)
 3. Run the installer
-4. **Important:** Remember the password you set for the `postgres` user
-5. Default port is 5432
-6. Accept all defaults except:
-   - Installation directory: Keep default (`C:\Program Files\PostgreSQL\15`)
-   - Port: Keep 5432
-   - Password: Set something you remember
+4. Open MySQL Workbench
 
-### Verify Installation:
+### Create a Connection in Workbench:
 
-Open Command Prompt or PowerShell and run:
-```powershell
-psql --version
-```
-
-You should see: `psql (PostgreSQL) 15.x`
+1. Click the **+** icon next to "MySQL Connections"
+2. Fill in:
+   - **Connection Name**: `practice`
+   - **Hostname**: `localhost`
+   - **Port**: `3306`
+   - **Username**: `root`
+3. Click **Store in Vault** and enter your password
+4. Click **Test Connection**
+5. If successful, click **OK**
 
 ---
 
-## Step 2: Start PostgreSQL Service
+## Step 6: Create Your Practice Database
 
-PostgreSQL should start automatically. Verify it's running:
+In MySQL Workbench:
 
-```powershell
-# Check if service is running (Windows)
-Get-Service postgresql*
-```
-
-Or start manually:
-```powershell
-# Start PostgreSQL service
-Start-Service postgresql-x64-15
-```
-
----
-
-## Step 3: Set Up pgAdmin
-
-1. Open pgAdmin (installed with PostgreSQL)
-2. Access at: http://localhost/pgadmin4 or search for pgAdmin in Start Menu
-3. Set up a master password (remember this!)
-4. In the sidebar, right-click "Servers" → Create → Server
-5. Configure:
-   - **Name:** `Local PostgreSQL`
-   - **Host name/address:** `localhost`
-   - **Port:** `5432`
-   - **Username:** `postgres`
-   - **Password:** (what you set during install)
-
----
-
-## Step 4: Create Your Learning Database
-
-In pgAdmin:
-
-1. Right-click "Databases" → Create → Database
-2. **Name:** `learning_db`
-3. **Owner:** `postgres`
-4. Click Save
-
----
-
-## Step 5: Create Your First User (Optional but Recommended)
-
-For security in production, create a dedicated user:
-
-In pgAdmin Query Tool, run:
-```sql
-CREATE ROLE learning_user WITH LOGIN PASSWORD 'learning123';
-
-GRANT CONNECT ON DATABASE learning_db TO learning_user;
-
-GRANT USAGE ON SCHEMA public TO learning_user;
-
-GRANT CREATE ON SCHEMA public TO learning_user;
-
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO learning_user;
-```
-
----
-
-## Step 6: Connect Using psql (Command Line)
-
-Test command-line connection:
-
-```powershell
-# Connect as postgres user
-psql -U postgres -d learning_db
-
-# Or with the new user
-psql -U learning_user -d learning_db
-```
-
-You should see the `learning_db=#` prompt.
-
----
-
-## Step 7: Set Up a Query Tool in VS Code (Optional)
-
-Install the "PostgreSQL" extension by Chris Kolkman in VS Code:
-
-1. Extensions → Search "PostgreSQL"
-2. Install the extension
-3. Create connection:
-   - User: `postgres`
-   - Password: (your password)
-   - Server: `localhost`
-   - Port: `5432`
-   - Database: `learning_db`
-
----
-
-## 📝 First Test: Run Your First Query
-
-In pgAdmin (or psql), run:
+1. Double-click your `practice` connection
+2. Copy-paste this code:
 
 ```sql
-SELECT version();
+CREATE DATABASE practice;
+USE practice;
 ```
 
-You should see the PostgreSQL version information.
+3. Click the **lightning bolt** icon (Execute)
+4. You should see: `Query OK`
+
+---
+
+## Step 7: Setup VS Code (Optional)
+
+If you want to use VS Code instead of Workbench:
+
+1. Open VS Code
+2. Go to Extensions (Ctrl+Shift+X)
+3. Search: `SQLTools`
+4. Install **SQLTools** (by Matheus Teixeira)
+5. Install **SQLTools MySQL/MariaDB/TiDB** (driver)
+6. Reload VS Code
+7. Click SQLTools icon in left sidebar
+8. Click **Add New Connection**
+9. Choose **MySQL/MariaDB**
+10. Fill in:
+    - **Connection name**: `practice`
+    - **Server Address**: `localhost`
+    - **Port**: `3306`
+    - **Database**: `practice`
+    - **Username**: `root`
+    - **Password**: Your MySQL password
 
 ---
 
 ## ✅ Verification Checklist
 
-- [ ] PostgreSQL installed and running
-- [ ] psql command works in terminal
-- [ ] Can connect to `learning_db` via psql
-- [ ] pgAdmin shows your database
-- [ ] `SELECT version();` returns PostgreSQL version
-- [ ] Created a user (optional but recommended)
+Check off when done:
+
+- [ ] MySQL Server installed
+- [ ] `mysql --version` works in Command Prompt
+- [ ] Can connect with `mysql -u root -p`
+- [ ] MySQL Workbench installed and connected
+- [ ] Created `practice` database
+- [ ] Saw "Query OK" message
 
 ---
 
-## 🎯 You're Ready!
+## 🎯 You're All Set!
 
-Once you've completed all steps, you're ready to start Module 01.
+Once all checks pass, you're ready to start learning SQL.
 
-## Next Step
+## Next Steps
 
-→ Move to `01_foundations/` to learn SQL fundamentals
+1. Go to: `01_Introduction_to_Databases/README.md`
+2. Learn what databases are
+3. Write your first SQL query
 
 ---
-
-## 📚 Useful Resources
-
-- PostgreSQL Official Docs: https://www.postgresql.org/docs/current/
-- pgAdmin Docs: https://www.pgadmin.org/docs/
-- psql Commands: https://www.postgresql.org/docs/current/app-psql.html
 
 ## 🆘 Troubleshooting
 
-**Can't connect to PostgreSQL:**
-- Check if service is running: `Get-Service postgresql*`
-- Verify port 5432 is not blocked
-- Check your password is correct
+### "mysql: command not found"
+**Problem**: MySQL not in system PATH
 
-**pgAdmin won't start:**
-- Clear browser cache
-- Try incognito/private window
-- Restart the pgAdmin service
+**Solution**:
+1. Find MySQL bin folder: Usually `C:\Program Files\MySQL\MySQL Server 8.0\bin`
+2. Copy the full path
+3. Press **Win+X** → **System**
+4. Click **Advanced system settings**
+5. Click **Environment Variables**
+6. Under "System variables", find **Path**
+7. Click **Edit** → **New**
+8. Paste the MySQL bin path
+9. Click **OK** three times
+10. Restart Command Prompt and try again
 
-**psql command not found:**
-- Add PostgreSQL bin to PATH: `C:\Program Files\PostgreSQL\15\bin`
-- Restart terminal
+### "Access denied for user 'root'"
+**Problem**: Wrong password
+
+**Solution**:
+1. Reinstall MySQL (choose custom install)
+2. Set password again (something simple)
+3. Write it down this time!
+
+### "Can't connect in Workbench"
+**Problem**: MySQL Server not running
+
+**Solution**:
+1. Press **Win+R**
+2. Type: `services.msc`
+3. Find **MySQL80** (or similar)
+4. Right-click → **Start**
+5. Try connecting again
+
+### "Port 3306 already in use"
+**Problem**: Another application using port 3306
+
+**Solution**:
+1. Reinstall MySQL
+2. Choose port **3307** instead of **3306**
+3. Update all connections to use port 3307
+
+---
+
+## 📚 What's Next?
+
+Once setup is complete:
+1. Read: `01_Introduction_to_Databases/README.md`
+2. Then: `02_SQL_Introduction/README.md`
+3. Then: Start learning actual SQL!
+
+**You're one step away from learning SQL!** 🚀
 
