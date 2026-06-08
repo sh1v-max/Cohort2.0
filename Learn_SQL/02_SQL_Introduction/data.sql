@@ -25,11 +25,11 @@ CREATE TABLE comments (
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
 INSERT INTO users (name, email, age)
-VALUES ('Wazir', 'wazir@example.com', 24),
-  ('Ritik', 'ritik@example.com', 24),
-  ('Crescha', 'crescha@example.com', 23),
-  ('Priya', 'priya@example.com', 26),
-  ('Arjun', 'arjun@example.com', 28);
+VALUES ('Adam', 'adam@example.com', 24),
+  ('Eva', 'eva@example.com', 24),
+  ('Mike', 'mike@example.com', 23),
+  ('John', 'john@example.com', 26),
+  ('Deo', 'deo@example.com', 28);
 INSERT INTO posts (user_id, title, content)
 VALUES (
     1,
@@ -70,11 +70,7 @@ VALUES (1, 2, 'Great post Wazir, very relatable!'),
     'Bengaluru is amazing, missing it already.'
   ),
   (4, 5, 'This really resonated with me.');
-SELECT *
-FROM users;
-SELECT *
-FROM posts;
-SELECT *
-FROM comments;
-show databases;
-SELECT DATABASE();
+
+DROP TABLE comments;
+DROP TABLE posts;
+DROP TABLE users;
