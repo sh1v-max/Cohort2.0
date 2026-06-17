@@ -24,6 +24,10 @@ WHERE age != 24;
 
 SELECT *
 FROM users
+WHERE name = 'Adam';
+
+SELECT *
+FROM users
 ORDER BY age;
 
 SELECT *
@@ -34,9 +38,6 @@ SELECT *
 FROM users
 LIMIT 3;
 
-SELECT *
-FROM users
-WHERE name = 'Adam';
 
 SELECT users.name,
   posts.title
