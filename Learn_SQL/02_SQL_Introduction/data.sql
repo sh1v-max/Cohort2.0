@@ -71,6 +71,6 @@ VALUES (1, 2, 'Great post Wazir, very relatable!'),
   ),
   (4, 5, 'This really resonated with me.');
 
-DROP TABLE comments;
-DROP TABLE posts;
-DROP TABLE users;
+-- DROP TABLE comments;
+-- DROP TABLE posts;
+-- DROP TABLE users;
