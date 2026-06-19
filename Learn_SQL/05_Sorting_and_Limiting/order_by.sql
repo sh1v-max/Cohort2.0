@@ -24,3 +24,7 @@ FROM users;
 
 SELECT DISTINCT age, name
 FROM users;
+
+SELECT DISTINCT age
+FROM users
+ORDER BY age;
