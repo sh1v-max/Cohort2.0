@@ -18,3 +18,9 @@ SELECT *
 FROM users
 WHERE age > 23
 ORDER BY age;
+
+SELECT DISTINCT age
+FROM users;
+
+SELECT DISTINCT age, name
+FROM users;
