@@ -3,11 +3,18 @@ import { useState, useEffect } from 'react'
 /**
  * useFetch — handles the complete fetch lifecycle: loading → data/error.
  *
- * @param {string} url — the URL to fetch. Pass null/undefined to skip fetching.
+ * @param {string|null} url — URL to fetch. Pass null to skip fetching.
  * @returns {{ data, loading, error, refetch }}
  *
- * The `cancelled` flag prevents setting state on an unmounted component,
- * which would cause a React memory leak warning.
+ * Uses AbortController to cancel in-flight requests when:
+ *   - The URL changes (new search started)
+ *   - The component unmounts
+ * This prevents stale responses from overwriting newer results.
+ *
+ * Why AbortController over a `cancelled` flag:
+ *   The flag prevents state updates but the network request still completes.
+ *   AbortController actually cancels the request at the network level —
+ *   saving bandwidth and preventing ghost state updates entirely.
  */
 export function useFetch(url) {
   const [data, setData]       = useState(null)
@@ -16,33 +23,35 @@ export function useFetch(url) {
   const [trigger, setTrigger] = useState(0)
 
   useEffect(() => {
-    if (!url) return
+    if (!url) {
+      setData(null)
+      setError(null)
+      setLoading(false)
+      return
+    }
 
-    let cancelled = false
+    const controller = new AbortController()
 
     setLoading(true)
     setError(null)
     setData(null)
 
-    fetch(url)
+    fetch(url, { signal: controller.signal })
       .then(res => {
         if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`)
         return res.json()
       })
       .then(json => {
-        if (!cancelled) {
-          setData(json)
-          setLoading(false)
-        }
+        setData(json)
+        setLoading(false)
       })
       .catch(err => {
-        if (!cancelled) {
-          setError(err.message)
-          setLoading(false)
-        }
+        if (err.name === 'AbortError') return  // cancelled — not an error
+        setError(err.message)
+        setLoading(false)
       })
 
-    return () => { cancelled = true }
+    return () => controller.abort()
   }, [url, trigger])
 
   const refetch = () => setTrigger(t => t + 1)

@@ -30,8 +30,9 @@ export default function App() {
   const isDebouncing = query.trim() !== debouncedQuery.trim()
 
   // ── useFetch: fetches GitHub user when debouncedQuery changes ────────────────
+  // /gh-api is proxied by Vite to https://api.github.com (avoids CORS in dev)
   const url = debouncedQuery.trim()
-    ? `https://api.github.com/users/${debouncedQuery.trim()}`
+    ? `/gh-api/users/${debouncedQuery.trim()}`
     : null
   const { data: user, loading, error } = useFetch(url)
 
