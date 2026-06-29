@@ -1,6 +1,6 @@
 import { usePrevious } from '../hooks/usePrevious'
 
-export function SearchBar({ value, onChange, loading }) {
+export function SearchBar({ value, onChange, loading, isDebouncing }) {
   const previous = usePrevious(value)
 
   return (
@@ -14,7 +14,7 @@ export function SearchBar({ value, onChange, loading }) {
           value={value}
           onChange={e => onChange(e.target.value)}
         />
-        {loading && <span className="search-spinner">⟳</span>}
+        {(isDebouncing || loading) && value.trim() && <span className="search-spinner">⟳</span>}
       </div>
 
       {previous && previous !== value && (

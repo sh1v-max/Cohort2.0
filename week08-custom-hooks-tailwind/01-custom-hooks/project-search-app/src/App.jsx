@@ -26,6 +26,9 @@ export default function App() {
   const [query, setQuery] = useState('')
   const debouncedQuery    = useDebounce(query, 500)
 
+  // true while the user is still typing (debounce hasn't settled yet)
+  const isDebouncing = query.trim() !== debouncedQuery.trim()
+
   // ── useFetch: fetches GitHub user when debouncedQuery changes ────────────────
   const url = debouncedQuery.trim()
     ? `https://api.github.com/users/${debouncedQuery.trim()}`
@@ -81,7 +84,7 @@ export default function App() {
         <div className="left-panel">
 
           {/* useDebounce + usePrevious live in SearchBar */}
-          <SearchBar value={query} onChange={setQuery} loading={loading} />
+          <SearchBar value={query} onChange={setQuery} loading={loading} isDebouncing={isDebouncing} />
 
           <div className="hook-legend">
             <h3>Hooks wired in this app</h3>
@@ -98,6 +101,7 @@ export default function App() {
 
           {/* useFetch states */}
           <div className="result-area">
+            {/* 1. No query — show prompt */}
             {!query.trim() && (
               <div className="empty-state">
                 <span className="empty-icon">👤</span>
@@ -106,7 +110,11 @@ export default function App() {
               </div>
             )}
 
-            {query.trim() && loading && (
+            {/* 2. Query exists + still debouncing OR fetch in progress — show skeleton
+                   isDebouncing covers the 500ms gap before the URL is even built.
+                   loading covers the actual fetch time.
+                   Both cases need feedback so the user knows something is happening. */}
+            {query.trim() && (isDebouncing || loading) && (
               <div className="loading-card">
                 <div className="skeleton skeleton-avatar" />
                 <div className="skeleton-lines">
@@ -117,7 +125,8 @@ export default function App() {
               </div>
             )}
 
-            {error && !loading && (
+            {/* 3. Settled + error */}
+            {!isDebouncing && error && !loading && (
               <div className="error-state">
                 <span>⚠️</span>
                 <div>
@@ -127,7 +136,8 @@ export default function App() {
               </div>
             )}
 
-            {user && !loading && !error && (
+            {/* 4. Settled + data */}
+            {!isDebouncing && user && !loading && !error && (
               <UserCard
                 user={user}
                 isBookmarked={isBookmarked(user.login)}
