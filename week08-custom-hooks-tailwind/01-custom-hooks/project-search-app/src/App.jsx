@@ -15,8 +15,9 @@ import { StatusBar }    from './components/StatusBar'
 import './App.css'
 
 export default function App() {
-  // ── useToggle: dark/light mode ──────────────────────────────────────────────
-  const [isDark, toggleDark] = useToggle(false)
+  // ── useLocalStorage: dark mode persists across refreshes ───────────────────
+  const [isDark, setIsDark] = useLocalStorage('gh-theme-dark', false)
+  const toggleDark = () => setIsDark(v => !v)
 
   // ── useLocalStorage: bookmarks survive page refresh ──────────────────────────
   const [bookmarks, setBookmarks]         = useLocalStorage('gh-bookmarks', [])
