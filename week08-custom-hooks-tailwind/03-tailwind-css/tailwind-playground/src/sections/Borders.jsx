@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { CodeBlock } from '../components/CodeBlock'
 
 const RADII = [
   { cls: 'rounded-none',  label: 'none',  px: '0px' },
@@ -92,9 +93,7 @@ export function Borders() {
             </div>
           </div>
         </div>
-        <div className="mt-4 px-4 py-3 bg-gray-900 dark:bg-slate-950 rounded-lg">
-          <code className="text-sm text-green-400 font-mono">"{radius} {width} {color}"</code>
-        </div>
+        <CodeBlock className="mt-4">{`"${radius} ${width} ${color}"`}</CodeBlock>
       </div>
 
       {/* Guidelines */}

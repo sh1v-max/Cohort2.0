@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { CodeBlock } from '../components/CodeBlock'
 
 const COLS = [1, 2, 3, 4, 5, 6]
 const GAPS = [
@@ -72,9 +73,7 @@ export function Grid() {
       </div>
 
       {/* Current class */}
-      <div className="mb-6 px-4 py-3 bg-gray-900 dark:bg-slate-950 rounded-lg">
-        <code className="text-sm text-green-400 font-mono">"grid grid-cols-{cols} {gap}"</code>
-      </div>
+      <CodeBlock className="mb-6">{`"grid grid-cols-${cols} ${gap}"`}</CodeBlock>
 
       {/* Live grid */}
       <div className="bg-white dark:bg-slate-800 border-2 border-dashed border-gray-200 dark:border-slate-600 rounded-xl p-4 mb-8"

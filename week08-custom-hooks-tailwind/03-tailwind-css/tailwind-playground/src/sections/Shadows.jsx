@@ -1,3 +1,5 @@
+import { CodeBlock } from '../components/CodeBlock'
+
 const SHADOWS = [
   { cls: 'shadow-none', label: 'none',    desc: 'Remove all shadow' },
   { cls: 'shadow-sm',   label: 'sm',      desc: 'Subtle — cards in light mode' },
@@ -43,9 +45,7 @@ export function Shadows() {
             <p className="text-xs text-gray-400 mt-1">shadow → hover:shadow-xl</p>
           </div>
         </div>
-        <div className="mt-4 px-4 py-3 bg-gray-900 dark:bg-slate-950 rounded-lg">
-          <code className="text-xs text-green-400 font-mono">"shadow-sm hover:shadow-md transition-shadow duration-200"</code>
-        </div>
+        <CodeBlock className="mt-4">{"shadow-sm hover:shadow-md transition-shadow duration-200"}</CodeBlock>
       </div>
 
       {/* Color shadows */}

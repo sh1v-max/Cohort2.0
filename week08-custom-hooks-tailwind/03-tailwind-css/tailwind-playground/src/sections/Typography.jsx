@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { CodeBlock } from '../components/CodeBlock'
 
 const SIZES = [
   { label: 'xs',   cls: 'text-xs',   px: '12px' },
@@ -88,10 +89,7 @@ export function Typography() {
       </div>
 
       {/* Current class */}
-      <div className="mb-6 px-4 py-3 bg-gray-900 dark:bg-slate-950 rounded-lg">
-        <p className="text-xs text-gray-400 mb-1">className</p>
-        <code className="text-sm text-green-400 font-mono break-all">"{classes}"</code>
-      </div>
+      <CodeBlock label="className" className="mb-6">{`"${classes}"`}</CodeBlock>
 
       {/* Controls */}
       <div className="space-y-4">

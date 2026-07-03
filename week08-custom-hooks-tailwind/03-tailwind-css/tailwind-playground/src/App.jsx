@@ -1,30 +1,34 @@
 import { useEffect, useState, useCallback } from 'react'
 import { useLocalStorage } from './hooks/useLocalStorage'
 
-import { Colors }      from './sections/Colors'
-import { Typography }  from './sections/Typography'
-import { Spacing }     from './sections/Spacing'
-import { Flexbox }     from './sections/Flexbox'
-import { Grid }        from './sections/Grid'
-import { Borders }     from './sections/Borders'
-import { Shadows }     from './sections/Shadows'
-import { States }      from './sections/States'
-import { Animations }  from './sections/Animations'
-import { Responsive }  from './sections/Responsive'
-import { Components }  from './sections/Components'
+import { Colors }          from './sections/Colors'
+import { Typography }      from './sections/Typography'
+import { Spacing }         from './sections/Spacing'
+import { Flexbox }         from './sections/Flexbox'
+import { Grid }            from './sections/Grid'
+import { Borders }         from './sections/Borders'
+import { Shadows }         from './sections/Shadows'
+import { States }          from './sections/States'
+import { Animations }      from './sections/Animations'
+import { Responsive }      from './sections/Responsive'
+import { DarkMode }        from './sections/DarkMode'
+import { ArbitraryValues } from './sections/ArbitraryValues'
+import { Components }      from './sections/Components'
 
 const SECTIONS = [
-  { id: 'colors',      label: 'Colors',        icon: '🎨' },
-  { id: 'typography',  label: 'Typography',    icon: '✍️' },
-  { id: 'spacing',     label: 'Spacing',       icon: '↔️' },
-  { id: 'flexbox',     label: 'Flexbox',       icon: '⬛' },
-  { id: 'grid',        label: 'Grid',          icon: '⊞' },
-  { id: 'borders',     label: 'Borders',       icon: '▣' },
-  { id: 'shadows',     label: 'Shadows',       icon: '◈' },
-  { id: 'states',      label: 'States',        icon: '⚡' },
-  { id: 'animations',  label: 'Animations',    icon: '✨' },
-  { id: 'responsive',  label: 'Responsive',    icon: '📱' },
-  { id: 'components',  label: 'Components',    icon: '🧩' },
+  { id: 'colors',      label: 'Colors' },
+  { id: 'typography',  label: 'Typography' },
+  { id: 'spacing',     label: 'Spacing' },
+  { id: 'flexbox',     label: 'Flexbox' },
+  { id: 'grid',        label: 'Grid' },
+  { id: 'borders',     label: 'Borders & Radius' },
+  { id: 'shadows',     label: 'Shadows' },
+  { id: 'states',      label: 'States & Peer' },
+  { id: 'animations',  label: 'Animations' },
+  { id: 'responsive',  label: 'Responsive' },
+  { id: 'darkmode',    label: 'Dark Mode' },
+  { id: 'arbitrary',   label: 'Arbitrary Values' },
+  { id: 'components',  label: 'Components' },
 ]
 
 function scrollTo(id) {
@@ -140,7 +144,9 @@ export default function App() {
                     : 'text-gray-600 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-slate-800',
                 ].join(' ')}
               >
-                <span className="text-base leading-none w-5 text-center">{s.icon}</span>
+                <span className={`text-[10px] font-bold w-5 text-center tabular-nums ${active === s.id ? 'text-blue-400' : 'text-gray-300 dark:text-slate-600'}`}>
+                  {String(SECTIONS.indexOf(s) + 1).padStart(2, '0')}
+                </span>
                 {s.label}
                 {active === s.id && (
                   <span className="ml-auto w-1.5 h-1.5 rounded-full bg-blue-500 flex-shrink-0" />
@@ -180,6 +186,10 @@ export default function App() {
             <Animations />
             <div className="border-t border-gray-100 dark:border-slate-800" />
             <Responsive />
+            <div className="border-t border-gray-100 dark:border-slate-800" />
+            <DarkMode />
+            <div className="border-t border-gray-100 dark:border-slate-800" />
+            <ArbitraryValues />
             <div className="border-t border-gray-100 dark:border-slate-800" />
             <Components />
             <div className="h-24" />

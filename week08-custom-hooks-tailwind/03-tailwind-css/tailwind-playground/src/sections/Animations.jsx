@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { CodeBlock } from '../components/CodeBlock'
 
 const ANIMS = [
   {
@@ -114,7 +115,7 @@ export function Animations() {
               <button className={`px-4 py-2 text-sm font-medium bg-blue-500 hover:bg-blue-700 hover:scale-105 text-white rounded-lg ${t.cls} shrink-0`}>
                 Hover me
               </button>
-              <div>
+              <div className="flex-1">
                 <code className="text-xs font-mono text-blue-600 dark:text-blue-400">{t.cls}</code>
                 <p className="text-xs text-gray-400 dark:text-slate-500">{t.desc}</p>
               </div>

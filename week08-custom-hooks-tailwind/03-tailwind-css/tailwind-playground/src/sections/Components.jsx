@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { CodeBlock } from '../components/CodeBlock'
 import { Button }        from '../components/Button'
 import { Badge }         from '../components/Badge'
 import { Modal }         from '../components/Modal'
@@ -97,11 +98,7 @@ export function Components() {
               <Button loading>Loading</Button>
             </div>
           </div>
-          <div className="px-4 py-3 bg-gray-900 dark:bg-slate-950 rounded-lg">
-            <code className="text-xs text-green-400 font-mono">
-              {'<Button variant="primary" size="md" loading={false}>Click me</Button>'}
-            </code>
-          </div>
+          <CodeBlock>{'<Button variant="primary" size="md" loading={false}>Click me</Button>'}</CodeBlock>
         </div>
       </div>
 
@@ -120,12 +117,7 @@ export function Components() {
             <Badge variant="yellow">Warning</Badge>
             <Badge variant="purple">Purple</Badge>
           </div>
-          <div className="px-4 py-3 bg-gray-900 dark:bg-slate-950 rounded-lg">
-            <code className="text-xs text-green-400 font-mono">
-              {'<Badge variant="green">Success</Badge>'}
-              <span className="text-gray-500 ml-3">// rounded-full pill</span>
-            </code>
-          </div>
+          <CodeBlock>{'<Badge variant="green">Success</Badge>  // rounded-full pill'}</CodeBlock>
         </div>
       </div>
 
@@ -192,10 +184,7 @@ export function Components() {
             <Button variant="secondary" size="sm" onClick={() => toast('Low disk space warning.', 'warning')}>Warning</Button>
             <Button variant="outline"   size="sm" onClick={() => toast('New version available.', 'info')}>Info</Button>
           </div>
-          <div className="px-4 py-3 bg-gray-900 dark:bg-slate-950 rounded-lg">
-            <code className="text-xs text-green-400 font-mono block">{'const { toast, toasts, remove } = useToast()'}</code>
-            <code className="text-xs text-green-400 font-mono block mt-1">{"toast('Saved!', 'success')  // auto-dismisses after 3.5s"}</code>
-          </div>
+          <CodeBlock>{"const { toast, toasts, remove } = useToast()\ntoast('Saved!', 'success')  // auto-dismisses after 3.5s"}</CodeBlock>
         </div>
       </div>
 

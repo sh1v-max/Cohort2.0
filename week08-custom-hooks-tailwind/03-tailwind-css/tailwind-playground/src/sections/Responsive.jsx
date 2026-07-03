@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { CodeBlock } from '../components/CodeBlock'
 
 const BREAKPOINTS = [
   { prefix: 'sm',  px: '640px',  desc: 'Large phone / small tablet' },
@@ -83,9 +84,7 @@ export function Responsive() {
 
         {/* Simulated responsive grid */}
         <div className="bg-white dark:bg-slate-800 border-2 border-dashed border-gray-200 dark:border-slate-600 rounded-xl p-4">
-          <p className="text-xs text-gray-400 dark:text-slate-500 mb-3 font-mono">
-            grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4
-          </p>
+          <CodeBlock className="mb-3">{"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"}</CodeBlock>
           <div style={{ display: 'grid', gridTemplateColumns: `repeat(${cols}, 1fr)`, gap: 16 }}>
             {['Card 1', 'Card 2', 'Card 3'].map(c => (
               <div key={c} className="bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 rounded-lg h-16 flex items-center justify-center text-sm font-medium text-blue-600 dark:text-blue-400">

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { CodeBlock } from '../components/CodeBlock'
 
 export function States() {
   const [inputVal, setInputVal] = useState('')
@@ -65,11 +66,7 @@ export function States() {
               <code className="text-[10px] font-mono text-gray-400">animate-spin</code>
             </div>
           </div>
-          <div className="mt-4 px-4 py-3 bg-gray-900 dark:bg-slate-950 rounded-lg">
-            <code className="text-xs text-green-400 font-mono">
-              "bg-blue-500 hover:bg-blue-600 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
-            </code>
-          </div>
+          <CodeBlock className="mt-4">{"bg-blue-500 hover:bg-blue-600 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed transition-all"}</CodeBlock>
         </div>
       </div>
 
@@ -117,8 +114,8 @@ export function States() {
       </div>
 
       {/* Group hover */}
-      <div>
-        <p className="text-xs font-semibold text-gray-400 dark:text-slate-500 uppercase tracking-wider mb-4">Group Hover</p>
+      <div className="mb-10">
+        <p className="text-xs font-semibold text-gray-400 dark:text-slate-500 uppercase tracking-wider mb-4">group-hover: — style children when parent is hovered</p>
         <div className="group bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 rounded-xl p-5 cursor-pointer hover:border-blue-200 dark:hover:border-blue-700 transition-colors">
           <div className="flex items-center justify-between">
             <div>
@@ -135,8 +132,54 @@ export function States() {
             </svg>
           </div>
         </div>
-        <div className="mt-3 px-4 py-3 bg-gray-900 dark:bg-slate-950 rounded-lg">
-          <code className="text-xs text-green-400 font-mono">{'<div className="group"> … <p className="group-hover:text-blue-600"> … </p>'}</code>
+        <CodeBlock className="mt-3">{'<div className="group"> … <p className="group-hover:text-blue-600"> … </p>'}</CodeBlock>
+      </div>
+
+      {/* Peer modifier */}
+      <div>
+        <p className="text-xs font-semibold text-gray-400 dark:text-slate-500 uppercase tracking-wider mb-4">peer — style an element based on a sibling's state</p>
+        <p className="text-xs text-gray-400 dark:text-slate-500 mb-4">
+          <code className="text-blue-500">peer</code> marks an element. Any following sibling can use <code className="text-blue-500">peer-*:</code> to react to its state. Most useful for checkbox toggles and input validation labels.
+        </p>
+
+        {/* Peer checkbox demo */}
+        <div className="bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 rounded-xl p-5 space-y-5">
+          {/* Toggle label */}
+          <div className="space-y-2">
+            <p className="text-xs text-gray-400 dark:text-slate-500 mb-2">Check the box — the label reacts</p>
+            {/* peer only works on siblings — the label text and track color are siblings of the input */}
+            <label className="flex items-center gap-3 cursor-pointer w-fit">
+              <input type="checkbox" className="peer sr-only" />
+              {/* This div IS a sibling of peer ✓ */}
+              <div className="w-10 h-6 rounded-full bg-gray-200 dark:bg-slate-600 peer-checked:bg-blue-500 transition-colors flex items-center px-1">
+                <div className="w-4 h-4 rounded-full bg-white shadow" />
+              </div>
+              {/* This span IS a sibling of peer ✓ */}
+              <span className="text-sm text-gray-500 dark:text-slate-400 peer-checked:text-blue-600 dark:peer-checked:text-blue-400 font-medium transition-colors">
+                Enable feature
+              </span>
+            </label>
+            <p className="text-[11px] text-amber-600 dark:text-amber-400 mt-1">
+              Note: <code>peer-*:</code> only works on <strong>siblings</strong> that come <strong>after</strong> the peer element in the DOM.
+            </p>
+            <CodeBlock className="mt-2">{'<input className="peer sr-only" />\n<div className="peer-checked:bg-blue-500">track</div>\n<span className="peer-checked:text-blue-600">Label</span>'}</CodeBlock>
+          </div>
+
+          {/* Input + error label */}
+          <div className="space-y-2">
+            <p className="text-xs text-gray-400 dark:text-slate-500 mb-2">Input validation — error label appears on :invalid</p>
+            <div>
+              <input
+                type="email"
+                placeholder="your@email.com"
+                className="peer block w-full max-w-xs px-3 py-2 text-sm border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 outline-none focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-900 invalid:border-red-400 invalid:focus:ring-red-200"
+              />
+              <p className="mt-1 text-xs text-red-500 opacity-0 peer-invalid:opacity-100 transition-opacity">
+                Please enter a valid email
+              </p>
+            </div>
+            <CodeBlock>{'<input className="peer" type="email" />\n<p className="peer-invalid:opacity-100 opacity-0">Error</p>'}</CodeBlock>
+          </div>
         </div>
       </div>
     </section>

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { CodeBlock } from '../components/CodeBlock'
 
 const COLORS = [
   'slate', 'gray', 'zinc', 'neutral', 'stone',
@@ -115,6 +116,25 @@ export function Colors() {
       <p className="mt-4 text-xs text-gray-400 dark:text-slate-500">
         Tip: shades 50–200 are light backgrounds, 500 is the base color, 600–900 are dark variants.
       </p>
+
+      {/* Purging callout */}
+      <div className="mt-6 p-4 bg-amber-50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-800/40 rounded-xl">
+        <p className="text-xs font-semibold text-amber-700 dark:text-amber-400 mb-1">
+          Why these swatches use inline <code className="font-mono">style</code>, not Tailwind classes
+        </p>
+        <p className="text-xs text-amber-700 dark:text-amber-300 leading-relaxed">
+          You can't write{' '}
+          <code className="font-mono bg-amber-100 dark:bg-amber-900/30 px-1 rounded">
+            {`className={\`bg-\${color}-\${shade}\`}`}
+          </code>
+          {' '}— Tailwind purges class names it doesn't see as full strings in your source at build time.
+          Dynamic strings are invisible. So the palette uses a hardcoded <code className="font-mono">HEX</code> lookup and{' '}
+          <code className="font-mono bg-amber-100 dark:bg-amber-900/30 px-1 rounded">
+            {'style={{ backgroundColor: HEX[color][shade] }}'}
+          </code>.
+          See <a href="#arbitrary" className="underline">Arbitrary Values</a> for the full rule.
+        </p>
+      </div>
     </section>
   )
 }
