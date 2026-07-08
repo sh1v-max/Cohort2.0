@@ -74,3 +74,17 @@ VALUES (1, 2, 'Great post Wazir, very relatable!'),
 -- DROP TABLE comments;
 -- DROP TABLE posts;
 -- DROP TABLE users;
+
+SELECT u.*, COUNT(p.id) AS post_count
+FROM users u
+LEFT JOIN posts p ON p.user_id = u.id
+GROUP BY u.id;
+
+SELECT users.*, COUNT(posts.id) AS post_count
+FROM users
+LEFT JOIN posts ON posts.user_id = users.id
+GROUP BY users.id;
+
+SELECT users.*,
+  (SELECT COUNT(*) FROM posts WHERE posts.user_id = users.id) AS post_count
+FROM users;
